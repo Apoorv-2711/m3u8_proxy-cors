@@ -27,7 +27,8 @@ class Requester:
             'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,'
                       'image/webp,image/apng,*/*;q=0.8',
             'connection': 'keep-alive',
-            'referer': None,
+            'referer': 'https://megacloud.tv/',
+            'origin': 'https://megacloud.tv',
             "sec-ch-ua-mobile": "?0",
             "sec-ch-ua-platform": "Linux",
         }
@@ -41,13 +42,15 @@ class Requester:
             additional_params = json.loads(additional_params)
         except (json.JSONDecodeError, TypeError):
             pass
-        additional_params = {} if additional_params is None or type(additional_params) != dict else additional_params
+        additional_params = {} if additional_params is None or type(
+            additional_params) != dict else additional_params
         cookies = cookies if cookies else {}
         json_data = {} if json_data is None else json_data
         if additional_params:
             self.req_url += "&" if "=" in self.req_url else ""
             self.req_url += self.query_string(additional_params)
-        self.req_url = self.req_url.replace("%3F", "&").replace("%3f", "&").replace("%3D", "=").replace("%3d", "=").replace("%20", " ")
+        self.req_url = self.req_url.replace("%3F", "&").replace(
+            "%3f", "&").replace("%3D", "=").replace("%3d", "=").replace("%20", " ")
         print(f"getting {self.req_url} with")
         if method == "post":
             data = requests.post(self.req_url, headers=headers, data=data, timeout=35,
