@@ -10,7 +10,7 @@ try:
     redoc_url = os.getenv('redoc_url', '/redoc') if enable_docs and os.getenv('redoc_url', '/redoc') else None
     # set environment variable 'documentation' to 'True' if you want to enable the /docs path
 except TypeError:
-    enable_docs = False
+    enable_docs = True
     docs_url = '/docs' if enable_docs else None
     redoc_url = '/redoc' if enable_docs else None
 
